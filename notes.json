@@ -1,4 +1,3 @@
-[
   {
     "id": 1,
     "title": "Graph Theory - Basics",
@@ -10,5 +9,13 @@
     "title": "Network Analysis - Fundamentals",
     "subject": "Data Science",
     "content": "Network analysis is used to study complex relationships and interconnected systems, analyzing measures like centrality, degree, and connectivity."
+  }
+]
+},
+  {
+    "id": 3,
+    "title": "My New Note",
+    "subject": "General",
+    "content": "Testing my new note update."
   }
 ]
