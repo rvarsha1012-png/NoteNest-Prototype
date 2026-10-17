@@ -1,17 +1,16 @@
+[
   {
     "id": 1,
     "title": "Graph Theory - Basics",
     "subject": "Mathematics / Computer Science",
-    "content": "Graph theory is the study of graphs, which are mathematical structures used to model pairwise relations between objects. A graph is made up of vertices (nodes) and edges."
+    "content": "Graph theory is the study of graphs, which are mathematical structures used to model pairwise relations between objects."
   },
   {
     "id": 2,
     "title": "Network Analysis - Fundamentals",
     "subject": "Data Science",
-    "content": "Network analysis is used to study complex relationships and interconnected systems, analyzing measures like centrality, degree, and connectivity."
-  }
-]
-},
+    "content": "Network analysis is used to study complex relationships and interconnected systems, analyzing measures like centrality, degree, and clustering."
+  },
   {
     "id": 3,
     "title": "My New Note",
