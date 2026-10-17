@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NoteNest - a student notes sharing prototype." />
+  <title>NoteNest | Student Notes Sharing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="NoteNest home">
+        <span class="brand-mark">N</span><span>NoteNest</span>
+      </a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">⌂</span> Dashboard</button>
+        <button class="nav-item" data-view="explore"><span class="nav-icon">⌕</span> Explore Notes</button>
+        <button class="nav-item" data-view="uploads"><span class="nav-icon">↥</span> My Uploads <span class="nav-count" id="uploadCount">0</span></button>
+      </nav>
+      <div class="sidebar-tip">
+        <div class="tip-icon">✦</div>
+        <h3>Share what you know.</h3>
+        <p>Your notes could make someone's toughest subject a little easier.</p>
+        <button class="text-button" id="sidebarUpload">Upload notes <span>↗</span></button>
+      </div>
+      <div class="sidebar-footer"><span class="online-dot"></span> Study smarter, together</div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbPage">Dashboard</strong></div>
+        <div class="top-actions">
+          <span class="semester-pill"><span>✦</span> Your study space</span>
+          <div class="avatar" title="Student profile">S</div>
+        </div>
+      </header>
+
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow" id="dateLabel">YOUR LEARNING SPACE</p>
+          <h1 id="pageTitle">A little progress, <span>a lot of growth.</span></h1>
+          <p class="subheading" id="pageSubtitle">Find your next useful note and keep learning together.</p>
+        </div>
+        <button class="primary-button" id="openUpload"><span>＋</span> Upload notes</button>
+      </section>
+
+      <section class="stats-grid" aria-label="Notes statistics">
+        <article class="stat-card stat-purple">
+          <div class="stat-top"><span>Total notes</span><span class="stat-icon">▤</span></div>
+          <div class="stat-number" id="totalNotes">6</div>
+          <div class="stat-foot"><span class="stat-dot"></span> Notes ready to explore</div>
+        </article>
+        <article class="stat-card stat-blue">
+          <div class="stat-top"><span>Subjects</span><span class="stat-icon">◈</span></div>
+          <div class="stat-number" id="totalSubjects">5</div>
+          <div class="stat-foot">Across study topics</div>
+        </article>
+        <article class="stat-card stat-peach">
+          <div class="stat-top"><span>Your uploads</span><span class="stat-icon">↥</span></div>
+          <div class="stat-number" id="myUploads">0</div>
+          <div class="stat-foot">Shared from this browser</div>
+        </article>
+      </section>
+
+      <section class="search-panel">
+        <div class="search-copy"><span class="search-sparkle">✦</span><div><h2>What are you studying today?</h2><p>Search notes by topic, subject, or keyword.</p></div></div>
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Try “Machine Learning” or “Unit 1”..." autocomplete="off"><kbd>SEARCH</kbd></label>
+      </section>
+
+      <section class="content-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">YOUR LIBRARY</p><h2 id="libraryTitle">Explore study notes</h2></div>
+          <label class="filter-wrap"><span>Subject</span><select id="subjectFilter"><option value="all">All subjects</option></select></label>
+        </div>
+        <div class="category-row" id="categoryRow">
+          <button class="category-chip selected" data-category="all">All notes <span id="allChipCount">6</span></button>
+          <button class="category-chip" data-category="AI & Data Science">AI &amp; Data Science</button>
+          <button class="category-chip" data-category="Programming">Programming</button>
+          <button class="category-chip" data-category="Mathematics">Mathematics</button>
+          <button class="category-chip" data-category="Computer Science">Computer Science</button>
+        </div>
+        <div class="notes-grid" id="notesGrid" aria-live="polite"></div>
+        <div class="empty-state hidden" id="emptyState"><div class="empty-illustration">⌕</div><h3>No notes found</h3><p>Try another keyword or choose a different subject.</p><button class="secondary-button" id="clearFilters">Clear filters</button></div>
+      </section>
+
+      <footer class="page-footer"><span>Made for curious minds <span class="heart">♥</span></span><span>NoteNest · Student prototype</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-heading"><div><p class="eyebrow">GROW THE LIBRARY</p><h2 id="modalTitle">Upload your notes</h2><p>Add a useful resource for your fellow students.</p></div><button class="close-button" id="closeUpload" aria-label="Close">×</button></div>
+      <form id="uploadForm">
+        <label class="field-label">Note title<input id="noteTitle" name="title" required maxlength="80" placeholder="e.g. Introduction to Neural Networks"></label>
+        <div class="field-row">
+          <label class="field-label">Subject
+            <select id="noteSubject" name="subject" required>
+              <option value="AI & Data Science">AI &amp; Data Science</option><option value="Programming">Programming</option><option value="Mathematics">Mathematics</option><option value="Computer Science">Computer Science</option><option value="Other">Other</option>
+            </select>
+          </label>
+          <label class="field-label">Semester
+            <select id="noteSemester" name="semester"><option>Semester 1</option><option>Semester 2</option><option>Semester 3</option><option>Semester 4</option><option selected>Semester 5</option><option>Semester 6</option><option>Semester 7</option><option>Semester 8</option></select>
+          </label>
+        </div>
+        <label class="field-label">Short description<textarea id="noteDescription" name="description" rows="3" maxlength="220" placeholder="What will students learn from these notes?"></textarea></label>
+        <label class="field-label">Choose a file <span class="optional">(PDF recommended, up to 10 MB)</span>
+          <input id="noteFile" name="file" type="file" accept=".pdf,.txt,.doc,.docx,.ppt,.pptx" required>
+        </label>
+        <p class="form-note">Prototype note: uploads are saved in this browser only. They are not automatically shared with other students online.</p>
+        <div class="form-actions"><button type="button" class="secondary-button" id="cancelUpload">Cancel</button><button type="submit" class="primary-button">Add to library <span>↗</span></button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
